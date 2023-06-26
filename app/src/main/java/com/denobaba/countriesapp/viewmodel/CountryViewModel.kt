@@ -1,14 +1,23 @@
 package com.denobaba.countriesapp.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.services.CountryDatabase
+import kotlinx.coroutines.launch
 
-class CountryViewModel: ViewModel() {
-    val Contries = MutableLiveData<List<countries>>()
-    fun getdatafromroom(){
-        val country = countries("turkey","ankara",1000)
-        Contries.value = listOf(country)
+class CountryViewModel(application: Application): BaseViewModel(application) {
+    val countryLiveData = MutableLiveData<List<countries>>()
+    fun getdatafromroom(uuid: Int){
+        launch {
+            val dao = CountryDatabase(getApplication()).countryDao()
+            val countries= dao.getCountry(uuid)
+            countryLiveData.value = listOf(countries)
+
+
+        }
+
 
 
     }

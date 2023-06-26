@@ -54,6 +54,14 @@ class FeedFragement : Fragment() {
         binding.recylecountry.adapter = countryAdapter
         observelivedata()
 
+        binding.swiperefreshlayout.setOnRefreshListener {
+            binding.recylecountry.visibility = View.GONE
+            binding.error.visibility = View.GONE
+            binding.countryloading.visibility = View.VISIBLE
+            viewModel.refreshdata()
+            binding.swiperefreshlayout.isRefreshing= false
+        }
+
     }
 
     fun observelivedata(){

@@ -1,11 +1,14 @@
 package com.denobaba.countriesapp.adapter
 
+import android.content.ClipData.Item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.denobaba.countriesapp.databinding.ItemRowBinding
 import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.util.getImage
+import com.denobaba.countriesapp.util.placeholderprogressbar
 import com.denobaba.countriesapp.view.FeedFragementDirections
 
 class countriesadapter(val countrieslist: ArrayList<countries>): RecyclerView.Adapter<countriesadapter.CountriesViewHolder>() {
@@ -25,11 +28,15 @@ class countriesadapter(val countrieslist: ArrayList<countries>): RecyclerView.Ad
 
     override fun onBindViewHolder(holder: CountriesViewHolder, position: Int) {
 
-        holder.binding.name.text = countrieslist[position].name
-        holder.binding.capital.text = countrieslist[position].capital
+        holder.binding.name.text = countrieslist[position].CountryName
+        holder.binding.capital.text = countrieslist[position].CountryCapital
+        holder.binding.imagehere.getImage(countrieslist[position].CountryFlag,
+            placeholderprogressbar(holder.itemView.context)
+        )
 
         holder.itemView.setOnClickListener {
-            val action= FeedFragementDirections.actionFeedFragementToCountriesFragment()
+            val action= FeedFragementDirections.actionFeedFragementToCountriesFragment(countrieslist[position].uuid)
+
             Navigation.findNavController(it).navigate(action)
         }
     }
