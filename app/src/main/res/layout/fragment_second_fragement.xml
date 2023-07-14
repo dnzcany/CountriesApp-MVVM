@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="CountryInformations"
+            type="com.denobaba.countriesapp.model.Countries" />
+    </data>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
+            android:downloadImage="@{CountryInformations.countryFlag}"
 
             android:src="@drawable/ic_launcher_background"
             android:layout_alignParentTop="true"
@@ -39,7 +46,7 @@
 
 
 
-            android:text="NAME"
+            android:text="@{CountryInformations.countryName}"
             android:textSize="40dp"
             android:textStyle="bold"
 
@@ -56,7 +63,7 @@
             android:layout_marginTop="300dp"
 
 
-            android:text="capital"
+            android:text="@{CountryInformations.countryCapital}"
             android:textSize="30dp"
             android:textStyle="bold"
 
@@ -74,7 +81,7 @@
             android:layout_marginTop="350dp"
 
 
-            android:text="region"
+            android:text="@{CountryInformations.countryRegion}"
             android:textSize="30dp"
             android:textStyle="bold"
 
@@ -92,7 +99,7 @@
             android:layout_marginTop="400dp"
 
 
-            android:text="language"
+            android:text="@{CountryInformations.countryLanguage}"
             android:textSize="30dp"
             android:textStyle="bold"
 

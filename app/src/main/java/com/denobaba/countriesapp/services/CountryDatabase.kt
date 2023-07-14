@@ -5,11 +5,11 @@ import android.provider.CalendarContract.Instances
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.model.Countries
 
 //abstract sınıflar soyut sınıflardır, normal bir classa extend edilerek kullanılabilir, fonksiyonlarıda override edilir
 
-@Database(entities = arrayOf(countries::class), version = 1) //roomda değişiklik yaparsan versionu değiştir
+@Database(entities = arrayOf(Countries::class), version = 2) //roomda değişiklik yaparsan versionu değiştir
 abstract class CountryDatabase: RoomDatabase() {
     abstract fun countryDao(): CountryDao
 
@@ -28,7 +28,8 @@ abstract class CountryDatabase: RoomDatabase() {
 
         private fun MakeDatabase(context: Context) =  Room.databaseBuilder(context.applicationContext,CountryDatabase::class.java,
             "countrydatabase"
-        ).build() //databasemizi oluşturuyoruz
+        ).fallbackToDestructiveMigration() // Enable destructive migrations
+            .build()
     }
 
 }

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.denobaba.countriesapp.R
 import com.denobaba.countriesapp.adapter.countriesadapter
 import com.denobaba.countriesapp.databinding.FragmentFirstFragementBinding
-import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.model.Countries
 import com.denobaba.countriesapp.viewmodel.FeedViewModel
 
 
@@ -65,10 +65,10 @@ class FeedFragement : Fragment() {
     }
 
     fun observelivedata(){
-        viewModel.countries1.observe(viewLifecycleOwner, Observer {countries ->
-            countries?.let {
+        viewModel.countries1.observe(viewLifecycleOwner, Observer {Countries ->
+            Countries?.let {
                 binding.recylecountry.visibility = View.VISIBLE
-                countryAdapter.updatecountrylist(countries)
+                countryAdapter.updatecountrylist(Countries)
             }
 
         })
