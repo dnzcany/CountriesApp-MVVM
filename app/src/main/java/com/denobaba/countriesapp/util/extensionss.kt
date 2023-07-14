@@ -2,6 +2,7 @@ package com.denobaba.countriesapp.util
 
 import android.content.Context
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -27,4 +28,10 @@ fun placeholderprogressbar(context: Context) : CircularProgressDrawable{
         start()
     }
 
+}
+
+
+@BindingAdapter("android:downloadImage")
+fun DownloadImage(view: ImageView,url:String?){
+    view.getImage(url, placeholderprogressbar(view.context))
 }

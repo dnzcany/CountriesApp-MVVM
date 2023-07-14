@@ -4,7 +4,7 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.model.Countries
 import com.denobaba.countriesapp.services.CountryApiService
 import com.denobaba.countriesapp.services.CountryDatabase
 import com.denobaba.countriesapp.util.CostomShredPreferences
@@ -21,9 +21,9 @@ class FeedViewModel(application: Application): BaseViewModel(application) {
     private val disposible = CompositeDisposable() //kullan at yüzünden hafızayı verimli tutuyoruz
 
     private var customPreferences = CostomShredPreferences(getApplication())
-    private var refreshtime = 10 * 60 * 1000 * 1000 * 1000L
+    private var refreshtime = 1 * 60 * 1000 * 1000 * 1000L
 
-    val countries1 = MutableLiveData<List<countries>>()
+    val countries1 = MutableLiveData<List<Countries>>()
     val loading = MutableLiveData<Boolean>()
     val error = MutableLiveData<Boolean>()
 
@@ -51,8 +51,8 @@ class FeedViewModel(application: Application): BaseViewModel(application) {
     fun getdatfromapi(){
         loading.value= true
         disposible.add(countryApiService.GetData().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableSingleObserver<List<countries>>(){
-                override fun onSuccess(t: List<countries>) {
+            .subscribeWith(object : DisposableSingleObserver<List<Countries>>(){
+                override fun onSuccess(t: List<Countries>) {
                     Storeinsqlite(t)
                     Toast.makeText(getApplication(),"countries from api",Toast.LENGTH_LONG).show()
 
@@ -70,14 +70,14 @@ class FeedViewModel(application: Application): BaseViewModel(application) {
 
     }
 
-    private fun showcountries(t: List<countries>){
+    private fun showcountries(t: List<Countries>){
         countries1.value = t
         loading.value = false
         error.value = false
 
     }
 
-    private fun Storeinsqlite(list: List<countries>){
+    private fun Storeinsqlite(list: List<Countries>){
         launch {
             val dao = CountryDatabase(getApplication()).countryDao()
             dao.deleteAllCountries()

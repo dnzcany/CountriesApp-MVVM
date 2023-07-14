@@ -1,6 +1,6 @@
 package com.denobaba.countriesapp.services
 
-import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.model.Countries
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -17,7 +17,7 @@ class CountryApiService {
         .build()
         .create(CountryAPI::class.java)
 
-    fun GetData(): Single<List<countries>>{
+    fun GetData(): Single<List<Countries>>{
         return api.getCountries()
     }
 }

@@ -1,6 +1,6 @@
 package com.denobaba.countriesapp.services
 
-import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.model.Countries
 import io.reactivex.Single
 import retrofit2.http.GET
 
@@ -12,7 +12,7 @@ interface CountryAPI {
     //BASE_URL = https://raw.githubusercontent.com/
     //EXT = atilsamancioglu/IA19-DataSetCountries/master/countrydataset.json
     @GET("atilsamancioglu/IA19-DataSetCountries/master/countrydataset.json")
-    fun getCountries():Single<List<countries>>
+    fun getCountries():Single<List<Countries>>
     //veriyi anlık olarak güncellemen gerekiyorsa Observable kullan, bir defalıgına alacaksan single kullan
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -14,7 +15,7 @@ import com.denobaba.countriesapp.view.CountriesFragmentDirections
 import com.denobaba.countriesapp.R
 import com.denobaba.countriesapp.adapter.countriesadapter
 import com.denobaba.countriesapp.databinding.FragmentSecondFragementBinding
-import com.denobaba.countriesapp.model.countries
+import com.denobaba.countriesapp.model.Countries
 import com.denobaba.countriesapp.util.getImage
 import com.denobaba.countriesapp.util.placeholderprogressbar
 import com.denobaba.countriesapp.viewmodel.CountryViewModel
@@ -25,6 +26,7 @@ class CountriesFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: CountryViewModel
     private var countryUuid= 0
+    private lateinit var dataBinding: FragmentSecondFragementBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,10 @@ class CountriesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_second_fragement, container, false)
+        //dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_second_fragement,container,false)
+
         _binding = FragmentSecondFragementBinding.inflate(layoutInflater,container,false)
+        dataBinding = _binding!!
         val view = binding.root
         return view
     }
@@ -58,16 +63,22 @@ class CountriesFragment : Fragment() {
     }
 
     private fun observelivedata(){
-        viewModel.countryLiveData.observe(viewLifecycleOwner, Observer {countries->
-            countries?.let {
+        viewModel.countryLiveData.observe(viewLifecycleOwner, Observer {Countries->
+            Countries?.let {
+                dataBinding.countryInformations = it[0]
+                /*
                 binding.name.text = it.first().CountryName
                 binding.capital.text = it.first().CountryCapital
                 binding.population.text= it.first().CountryCurrency
                 binding.langiage.text= it.first().CountryLanguage
                 context?.let {
-                    binding.countryimage.getImage(countries.first().CountryFlag, placeholderprogressbar(it))
+                    binding.countryimage.getImage(Countries.first().CountryFlag, placeholderprogressbar(it))
+
+
 
                 }
+
+                 */
 
             }
 
